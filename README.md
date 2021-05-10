@@ -17,3 +17,8 @@ Here are some public domain animal illustrations I found, which might look OK on
 ## Docs
 
 - https://github.com/pimoroni/inky
+
+## Other Setup Notes
+
+You need to enable the SPI interface on the Pi.
+Raspbian provies `raspi-config` from which you can select "Interface options" then "SPI".
