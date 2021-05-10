@@ -8,15 +8,19 @@ if test -z "$SSH_TARGET"; then
   exit 1
 fi
 
+CODE_LOC="inky-pal"
+VENV_LOC="inky-pal-venv"
+
 echo "== COPYING CODE"
-rsync -rv --filter ':- .gitignore' --exclude '/.git' --exclude '/.direnv' . "$SSH_TARGET:~/inky-pal"
+rsync -rv --filter ':- .gitignore' --exclude '/.git' --exclude '/.direnv' . "$SSH_TARGET:$CODE_LOC"
 
 echo
 echo "== SETTING UP VENV"
-VENV_LOC=/home/pi/inky-pal-venv
-ssh "$SSH_TARGET" "test -d venv || python3 -m venv $VENV_LOC"
+ssh "$SSH_TARGET" "if ! test -d $VENV_LOC; then python3 -m venv $VENV_LOC; fi"
 
 echo
 echo "== INSTALLING DEPS"
-scp requirements.txt "$SSH_TARGET:~/requirements.txt"
-ssh "$SSH_TARGET" "$VENV_LOC/bin/pip install -r ~/requirements.txt"
+ssh "$SSH_TARGET" "$VENV_LOC/bin/pip install -r $CODE_LOC/requirements.txt"
+
+echo
+echo "== ALL DONE HOORAY"
