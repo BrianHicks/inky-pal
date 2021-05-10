@@ -15,6 +15,20 @@ echo "== COPYING CODE"
 rsync -rv --filter ':- .gitignore' --exclude '/.git' --exclude '/.direnv' . "$SSH_TARGET:$CODE_LOC"
 
 echo
+echo "== INSTALLING SYSTEM DEPENDENCIES"
+
+system-dep() {
+  echo "${1:-}"
+  if ! ssh "$SSH_TARGET" "dpkg -s ${1:-}" > /dev/null 2>&1; then
+    ssh "$SSH_TARGET" "sudo apt-get install --assume-yes ${1:-}"
+  fi
+}
+
+system-dep libatlas-base-dev
+system-dep libopenjp2-7-dev
+system-dep libtiff-dev
+
+echo
 echo "== SETTING UP VENV"
 ssh "$SSH_TARGET" "if ! test -d $VENV_LOC; then python3 -m venv $VENV_LOC; fi"
 
