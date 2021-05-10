@@ -14,6 +14,10 @@ Here are some public domain animal illustrations I found, which might look OK on
 - https://www.publicdomainpictures.net/en/view-image.php?image=159727&picture=elephant-african-clipart
 - https://thegraphicsfairy.com/vintage-animal-clip-art-fox-drawings/
 
+Or I could just dither some art?
+
+- https://api.artic.edu/docs/#iiif-image-api
+
 ## Docs
 
 - https://github.com/pimoroni/inky
